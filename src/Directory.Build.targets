@@ -4,8 +4,6 @@
     <FrameworkVersion>6.0.1</FrameworkVersion>
     <ExtensionsVersion>6.0.0</ExtensionsVersion>
     <EntityFrameworkVersion>6.0.1</EntityFrameworkVersion>
-    
-    <IdentityServerVersion>4.1.3-*</IdentityServerVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,12 +21,6 @@
 
     <!--our stuff -->
     <PackageReference Update="IdentityModel" Version="5.2.0" />
-
-    <PackageReference Update="IdentityServer4" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.AspNetIdentity" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.Storage" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.EntityFramework.Storage" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="IdentityServer4.EntityFramework" Version="$(IdentityServerVersion)" />
 
     <!--microsoft extensions -->
     <PackageReference Update="Microsoft.Extensions.Caching.Memory" Version="$(ExtensionsVersion)" />
