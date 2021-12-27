@@ -175,7 +175,7 @@ namespace IdentityServer.UnitTests.Services.Default
             var claims = await _subject.GetAccessTokenClaimsAsync(_user, ResourceValidationResult, _validatedRequest);
 
             var scopes = claims.Where(x => x.Type == JwtClaimTypes.Scope).Select(x => x.Value);
-            scopes.Count().Should().Be(4);
+            scopes.Should().HaveCount(4);
             scopes.ToArray().Should().BeEquivalentTo(new string[] { "api1", "api2", "id1", "id2" });
         }
         
@@ -192,7 +192,7 @@ namespace IdentityServer.UnitTests.Services.Default
             var claims = await _subject.GetAccessTokenClaimsAsync(_user, resourceResult, _validatedRequest);
 
             var scopes = claims.Where(x => x.Type == JwtClaimTypes.Scope).Select(x => x.Value);
-            scopes.Count().Should().Be(1);
+            scopes.Should().HaveCount(1);
             scopes.ToArray().Should().BeEquivalentTo(new string[] { "api:123" });
         }
 
@@ -204,7 +204,7 @@ namespace IdentityServer.UnitTests.Services.Default
             var claims = await _subject.GetAccessTokenClaimsAsync(_user, ResourceValidationResult, _validatedRequest);
 
             var scopes = claims.Where(x => x.Type == JwtClaimTypes.Scope).Select(x => x.Value);
-            scopes.Count().Should().Be(0);
+            scopes.Should().HaveCount(0);
         }
         
         [Fact]
@@ -222,7 +222,7 @@ namespace IdentityServer.UnitTests.Services.Default
             var claims = await _subject.GetAccessTokenClaimsAsync(_user, resourceResult, _validatedRequest);
 
             var scopes = claims.Where(x => x.Type == JwtClaimTypes.Scope).Select(x => x.Value);
-            scopes.Count().Should().Be(1);
+            scopes.Should().HaveCount(1);
             scopes.ToArray().Should().BeEquivalentTo(new string[] { "api2" });
         }
 
@@ -242,7 +242,7 @@ namespace IdentityServer.UnitTests.Services.Default
             var claims = await _subject.GetAccessTokenClaimsAsync(_user, ResourceValidationResult, _validatedRequest);
 
             var scopes = claims.Where(x => x.Type == JwtClaimTypes.Scope).Select(x => x.Value);
-            scopes.Count().Should().Be(1);
+            scopes.Should().HaveCount(1);
             scopes.ToArray().Should().BeEquivalentTo(new string[] { "resource" });
         }
         

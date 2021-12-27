@@ -5,6 +5,7 @@
 using IdentityModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace IdentityServer4.Validation
 {
@@ -172,7 +173,7 @@ namespace IdentityServer4.Validation
         /// <value>
         /// The request object values
         /// </value>
-        public Dictionary<string, string> RequestObjectValues { get; set; } = new Dictionary<string, string>();
+        public IEnumerable<Claim> RequestObjectValues { get; set; } = Enumerable.Empty<Claim>();
 
         /// <summary>
         /// Gets or sets the request object (either passed by value or retrieved by reference)

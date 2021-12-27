@@ -4,7 +4,6 @@
 
 using IdentityModel;
 using IdentityServer4.Configuration;
-using IdentityServer4.Extensions;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Validation;
@@ -18,6 +17,8 @@ using System.Threading.Tasks;
 
 namespace IdentityServer4.ResponseHandling
 {
+    using IdentityServer4.Extensions;
+    
     /// <summary>
     /// Default implementation of the discovery endpoint response generator
     /// </summary>

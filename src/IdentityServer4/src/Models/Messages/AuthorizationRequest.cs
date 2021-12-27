@@ -6,6 +6,7 @@ using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Security.Claims;
 
 namespace IdentityServer4.Models
 {
@@ -106,7 +107,7 @@ namespace IdentityServer4.Models
         /// <value>
         /// The request object values
         /// </value>
-        public Dictionary<string, string> RequestObjectValues { get; } = new Dictionary<string, string>();
+        public IEnumerable<Claim> RequestObjectValues { get; }
 
 
         /// <summary>

@@ -9,10 +9,11 @@ using IdentityServer4.Stores;
 using IdentityServer4.Models;
 using System.Linq;
 using System;
-using IdentityServer4.Extensions;
 
 namespace IdentityServer4.Services
 {
+    using IdentityServer4.Extensions;
+    
     /// <summary>
     /// The default key material service
     /// </summary>

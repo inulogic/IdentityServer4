@@ -57,7 +57,7 @@ namespace IdentityServer.UnitTests.Validation
 
             result.IsError.Should().Be(false);
             result.IsActive.Should().Be(true);
-            result.Claims.Count().Should().Be(5);
+            result.Claims.Should().HaveCount(5);
             result.Token.Should().Be(handle);
         }
 

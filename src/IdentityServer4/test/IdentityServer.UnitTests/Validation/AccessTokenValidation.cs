@@ -59,7 +59,7 @@ namespace IdentityServer.UnitTests.Validation
             var result = await validator.ValidateAccessTokenAsync(handle);
 
             result.IsError.Should().BeFalse();
-            result.Claims.Count().Should().Be(8);
+            result.Claims.Should().HaveCount(8);
             result.Claims.First(c => c.Type == JwtClaimTypes.ClientId).Value.Should().Be("roclient");
         }
 
@@ -188,9 +188,9 @@ namespace IdentityServer.UnitTests.Validation
             result.Jwt.Should().NotBeNullOrEmpty();
             result.Client.ClientId.Should().Be("roclient");
 
-            result.Claims.Count().Should().Be(8);
+            result.Claims.Should().HaveCount(8);
             var scopes = result.Claims.Where(c => c.Type == "scope").Select(c => c.Value).ToArray();
-            scopes.Count().Should().Be(2);
+            scopes.Should().HaveCount(2);
             scopes[0].Should().Be("read");
             scopes[1].Should().Be("write");
         }

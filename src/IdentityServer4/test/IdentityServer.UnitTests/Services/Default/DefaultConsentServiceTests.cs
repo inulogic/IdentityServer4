@@ -82,7 +82,7 @@ namespace IdentityServer.UnitTests.Services.Default
             await _subject.UpdateConsentAsync(_user, _client, new[] { new ParsedScopeValue("scope1"), new ParsedScopeValue("scope2") });
 
             var consent = await _userConsentStore.GetUserConsentAsync(_user.GetSubjectId(), _client.ClientId);
-            consent.Scopes.Count().Should().Be(2);
+            consent.Scopes.Should().HaveCount(2);
             consent.Scopes.Should().Contain("scope1");
             consent.Scopes.Should().Contain("scope2");
         }

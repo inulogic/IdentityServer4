@@ -201,7 +201,7 @@ namespace IdentityServer.UnitTests.Validation.AuthorizeRequest_Validation
             var validator = Factory.CreateAuthorizeRequestValidator();
             var result = await validator.ValidateAsync(parameters);
 
-            result.ValidatedRequest.PromptModes.Count().Should().Be(2);
+            result.ValidatedRequest.PromptModes.Should().HaveCount(2);
             result.ValidatedRequest.PromptModes.Should().Contain(OidcConstants.PromptModes.Login);
             result.ValidatedRequest.PromptModes.Should().Contain(OidcConstants.PromptModes.Consent);
         }

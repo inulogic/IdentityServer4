@@ -107,12 +107,11 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
 
         [Fact]
-        public void ProcessConsentAsync_NullRequest_Throws()
+        public async Task ProcessConsentAsync_NullRequest_Throws()
         {
             Func<Task> act = () => _subject.ProcessConsentAsync(null, new ConsentResponse());
 
-            act.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("request");
+            await act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("request");
         }
         
         [Fact]
@@ -131,7 +130,7 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
         }
 
         [Fact]
-        public void ProcessConsentAsync_PromptModeIsLogin_Throws()
+        public async Task ProcessConsentAsync_PromptModeIsLogin_Throws()
         {
             RequiresConsent(true);
             var request = new ValidatedAuthorizeRequest()
@@ -146,12 +145,11 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
             Func<Task> act = () => _subject.ProcessConsentAsync(request);
 
-            act.Should().Throw<ArgumentException>()
-                .And.Message.Should().Contain("PromptMode");
+            await act.Should().ThrowAsync<ArgumentException>().WithMessage("*PromptMode*");
         }
 
         [Fact]
-        public void ProcessConsentAsync_PromptModeIsSelectAccount_Throws()
+        public async Task ProcessConsentAsync_PromptModeIsSelectAccount_Throws()
         {
             RequiresConsent(true);
             var request = new ValidatedAuthorizeRequest()
@@ -166,8 +164,7 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
             Func<Task> act = () => _subject.ProcessConsentAsync(request);
 
-            act.Should().Throw<ArgumentException>()
-                .And.Message.Should().Contain("PromptMode");
+            await act.Should().ThrowAsync<ArgumentException>().WithMessage("*PromptMode*");
         }
 
 
@@ -326,8 +323,8 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
                 ScopesValuesConsented = new string[] { "openid", "read" }
             };
             var result = await _subject.ProcessConsentAsync(request, consent);
-            request.ValidatedResources.Resources.IdentityResources.Count().Should().Be(1);
-            request.ValidatedResources.Resources.ApiScopes.Count().Should().Be(1);
+            request.ValidatedResources.Resources.IdentityResources.Should().HaveCount(1);
+            request.ValidatedResources.Resources.ApiScopes.Should().HaveCount(1);
             "openid".Should().Be(request.ValidatedResources.Resources.IdentityResources.Select(x => x.Name).First());
             "read".Should().Be(request.ValidatedResources.Resources.ApiScopes.First().Name);
             request.WasConsentShown.Should().BeTrue();
@@ -356,8 +353,8 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
                 ScopesValuesConsented = new string[] { "openid", "read" }
             };
             var result = await _subject.ProcessConsentAsync(request, consent);
-            request.ValidatedResources.Resources.IdentityResources.Count().Should().Be(1);
-            request.ValidatedResources.Resources.ApiScopes.Count().Should().Be(1);
+            request.ValidatedResources.Resources.IdentityResources.Should().HaveCount(1);
+            request.ValidatedResources.Resources.ApiScopes.Should().HaveCount(1);
             "read".Should().Be(request.ValidatedResources.Resources.ApiScopes.First().Name);
             request.WasConsentShown.Should().BeTrue();
             result.IsConsent.Should().BeFalse();

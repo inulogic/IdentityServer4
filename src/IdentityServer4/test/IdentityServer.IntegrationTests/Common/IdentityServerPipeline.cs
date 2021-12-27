@@ -318,6 +318,8 @@ namespace IdentityServer.IntegrationTests.Common
             string responseMode = null,
             string codeChallenge = null,
             string codeChallengeMethod = null,
+            string display = null,
+            string uiLocales = null,
             object extra = null)
         {
             var url = new RequestUrl(AuthorizeEndpoint).CreateAuthorizeUrl(
@@ -332,7 +334,9 @@ namespace IdentityServer.IntegrationTests.Common
                 responseMode: responseMode,
                 codeChallenge: codeChallenge,
                 codeChallengeMethod: codeChallengeMethod,
-                extra: extra);
+                display: display,
+                uiLocales: uiLocales,
+                extra: Parameters.FromObject(extra));
             return url;
         }
 
@@ -353,12 +357,14 @@ namespace IdentityServer.IntegrationTests.Common
             string responseMode = null,
             string codeChallenge = null,
             string codeChallengeMethod = null,
+            string display = null,
+            string uiLocales = null,
             object extra = null)
         {
             var old = BrowserClient.AllowAutoRedirect;
             BrowserClient.AllowAutoRedirect = false;
 
-            var url = CreateAuthorizeUrl(clientId, responseType, scope, redirectUri, state, nonce, loginHint, acrValues, responseMode, codeChallenge, codeChallengeMethod, extra);
+            var url = CreateAuthorizeUrl(clientId, responseType, scope, redirectUri, state, nonce, loginHint, acrValues, responseMode, codeChallenge, codeChallengeMethod, display, uiLocales, extra);
             var result = await BrowserClient.GetAsync(url);
             result.StatusCode.Should().Be(HttpStatusCode.Found);
 

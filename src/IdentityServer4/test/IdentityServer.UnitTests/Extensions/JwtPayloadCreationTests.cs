@@ -43,11 +43,7 @@ namespace IdentityServer.UnitTests.Extensions
             var payload = _token.CreateJwtPayload(new SystemClock(), options, TestLogger.Create<JwtPayloadCreationTests>());
 
             payload.Should().NotBeNull();
-            var scopes = payload.Claims.Where(c => c.Type == JwtClaimTypes.Scope).ToArray();
-            scopes.Count().Should().Be(3);
-            scopes[0].Value.Should().Be("scope1");
-            scopes[1].Value.Should().Be("scope2");
-            scopes[2].Value.Should().Be("scope3");
+            payload.Should().Contain("\"scope\":[\"scope1\",\"scope2\",\"scope3\"]");
         }
         
         [Fact]
@@ -61,9 +57,7 @@ namespace IdentityServer.UnitTests.Extensions
             var payload = _token.CreateJwtPayload(new SystemClock(), options, TestLogger.Create<JwtPayloadCreationTests>());
 
             payload.Should().NotBeNull();
-            var scopes = payload.Claims.Where(c => c.Type == JwtClaimTypes.Scope).ToList();
-            scopes.Count().Should().Be(1);
-            scopes.First().Value.Should().Be("scope1 scope2 scope3");
+            payload.Should().Contain("\"scope\":\"scope1 scope2 scope3\"");
         }
     }
 }

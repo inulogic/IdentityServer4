@@ -212,7 +212,7 @@ namespace IdentityServer.UnitTests.Services.Default
 
             var grants = await _subject.GetAllGrantsAsync("123");
 
-            grants.Count().Should().Be(2);
+            grants.Should().HaveCount(2);
             var grant1 = grants.First(x => x.ClientId == "client1");
             grant1.SubjectId.Should().Be("123");
             grant1.ClientId.Should().Be("client1");
@@ -722,7 +722,7 @@ namespace IdentityServer.UnitTests.Services.Default
 
             var grants = await _subject.GetAllGrantsAsync("123");
 
-            grants.Count().Should().Be(1);
+            grants.Should().HaveCount(1);
             grants.First().Scopes.Should().Contain(new string[] { "foo1", "foo2" });
 
             var handle9 = await _codes.StoreAuthorizationCodeAsync(new AuthorizationCode()
@@ -739,7 +739,7 @@ namespace IdentityServer.UnitTests.Services.Default
 
             grants = await _subject.GetAllGrantsAsync("123");
 
-            grants.Count().Should().Be(1);
+            grants.Should().HaveCount(1);
             grants.First().Scopes.Should().Contain(new string[] { "foo1", "foo2", "quux3" });
         }
     }

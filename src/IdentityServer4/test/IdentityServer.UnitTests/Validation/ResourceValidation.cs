@@ -331,7 +331,7 @@ namespace IdentityServer.UnitTests.Validation
             result.Succeeded.Should().BeTrue();
             result.Resources.ApiResources.Count.Should().Be(2);
             result.Resources.ApiResources.Select(x => x.Name).Should().BeEquivalentTo(new[] { "api1", "api2" });
-            result.RawScopeValues.Count().Should().Be(1);
+            result.RawScopeValues.Should().HaveCount(1);
             result.RawScopeValues.Should().BeEquivalentTo(new[] { "resource" });
         }
     }

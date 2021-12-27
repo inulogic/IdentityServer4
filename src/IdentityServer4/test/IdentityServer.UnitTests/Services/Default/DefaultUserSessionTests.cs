@@ -156,7 +156,7 @@ namespace IdentityServer.UnitTests.Services.Default
             cookieContainer.SetCookies(new Uri("http://server"), string.Join(",", cookies));
 
             var query = cookieContainer.GetCookies(new Uri("http://server")).Cast<Cookie>().Where(x => x.Name == _options.Authentication.CheckSessionCookieName);
-            query.Count().Should().Be(0);
+            query.Should().HaveCount(0);
         }
 
         [Fact]

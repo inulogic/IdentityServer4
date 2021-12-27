@@ -16,7 +16,7 @@ namespace IdentityServer.UnitTests.Extensions
 
             var allowedAlgorithms = new List<ApiResource> { resource }.FindMatchingSigningAlgorithms();
 
-            allowedAlgorithms.Count().Should().Be(0);
+            allowedAlgorithms.Should().HaveCount(0);
         }
         
         [Fact]
@@ -27,7 +27,7 @@ namespace IdentityServer.UnitTests.Extensions
 
             var allowedAlgorithms = new List<ApiResource> { resource1, resource2 }.FindMatchingSigningAlgorithms();
 
-            allowedAlgorithms.Count().Should().Be(0);
+            allowedAlgorithms.Should().HaveCount(0);
         }
         
         [Theory]
